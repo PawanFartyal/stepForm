@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="./form.js" defer></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
+                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                    <h2 id="heading">Sign Up Your User Account</h2>
+                    <p>Fill all form field to go to next step</p>
+                    <form id="msform" class="px-2">
+                        <!-- fieldsets -->
+                        <fieldset class="step active">
+                            <div class="form-card">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h2 class="fs-title">Account Information:</h2>
+                                    </div>
+                                </div> 
+                                 <label class="fieldlabels">Username: *</label> <input type="text" class="input" name="uname" id="username" placeholder="UserName" />
+                                 <p class="warning" id="usernameWarning"></p>
+                                 <label class="fieldlabels">Password: *</label> <input type="password" class="input"  name="pwd" id="password" placeholder="Password" />
+                                 <p class="warning" id="passwordWarning"></p>
+                                  <label class="fieldlabels">Confirm Password: *</label> <input type="password" class="input"  id="confirmPassword" name="cpwd" placeholder="Confirm Password" />
+                                  <p class="warning" id="conformPasswordWarning"></p>
+                            </div> 
+                            <input type="button" name="save" class="action-button saveBtn" id="saveStepOne"  value="Save"/>
+                            <input type="button" name="next" class="next action-button" value="Next" />
+                        </fieldset>
+                        <fieldset class="step">
+                            <div class="form-card">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h2 class="fs-title">Personal Information:</h2>
+                                    </div>
+                                </div> 
+                                <label class="fieldlabels">First Name: *</label> <input type="text" name="fname" id="firstName" class="name input" placeholder="First Name" />
+                                <p class="warning" id="firstNameWarning"></p>
+                                <label class="fieldlabels">Last Name: *</label> <input type="text" name="lname" id="lastName" class="name input" placeholder="Last Name" />
+                                <p class="warning" id="lastNameWarning"></p>
+                                <label class="fieldlabels" for="">Age: *</label>
+                                <input type="text" name="age" id="age" maxlength="3" class="age input">
+                                <p class="warning" id="ageWarning"></p>
+                            </div>
+                            <input type="button" name="save" id="saveStepTwo" class="action-button saveBtn"  value="Save" />
+                            <input type="button" name="next" class="next action-button" value="Next" /> 
+                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                        </fieldset>
+                        <fieldset class="step">
+                            <div class="form-card">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h2 class="fs-title">Contact:</h2>
+                                    </div>
+                                </div> 
+                                <label class="fieldlabels">Email: *</label> <input type="email" name="email" id="emailField" class="input" placeholder="Email Id" />
+                                <p class="warning" id="emailWarning"></p>
+                                <label class="fieldlabels">Contact No.: *</label> <input type="text" class="phoneNumber input" id="contact" name="phno" placeholder="Contact No." maxlength="10" />
+                                <p class="warning" id="phoneWarning"></p>
+                                <label class="fieldlabels">Alternate Contact No.: *</label> <input type="text" class="phoneNumber input" id="alternativeContact" name="phno_2" maxlength="10" placeholder="Alternate Contact No." />
+                                <p class="warning" id="altPhoneWarning"></p>
+                            </div> <input type="button" name="next" id="submit" class="action-button" value="Submit" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

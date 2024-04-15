@@ -1,0 +1,21 @@
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    display: flex;
+    align-items: center;
+}
+.detail {
+    display: flex;
+    justify-content: space-between;
+}
+.value {
+    text-align: right;
+    font-weight: 400;
+}
+.detailsContainer {
+    width: 500px;
+    margin:auto;
+    padding: 2rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background: white;
+}
