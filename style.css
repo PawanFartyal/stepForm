@@ -158,6 +158,6 @@ input[type="radio"] {
     height: .85rem;
     font-weight: 500;
    }
-.next {
-    display: none;
+.next:disabled {
+    cursor: not-allowed !important;
 }

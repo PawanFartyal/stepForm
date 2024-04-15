@@ -15,6 +15,7 @@ const form = document.querySelector("#msform");
 const usernameWarning = document.querySelector("#usernameWarning");
 const passwordWarning = document.querySelector("#passwordWarning");
 const conformPasswordWarning = document.querySelector("#conformPasswordWarning");
+const warning = Array.from(document.querySelectorAll(".warning"));
 const age = document.querySelector("#age");
 const input = document.querySelectorAll(".input");
 let details = {
@@ -26,24 +27,27 @@ let details = {
     "Contact Number":"",
     "Alternative Contact Number":"",
     Email:"",
-
 }
 let current = 0;
+console.log()
 function stepChange() {
     formStep.forEach((step)=> {
         step.classList.remove("active");
     })
     formStep[current].classList.add("active");
 }
-function nextHandler(e) {
+function nextHandler() {
     current ++;
     if(current >= formStep.length) return;
     stepChange();
 }
-function prevHandler(e) {
+function prevHandler() {
     current--;
     if(current < 0 ) return ;
     stepChange();
+}
+function disabledBtn(next){
+    next.disabled = warning.some((warn)=>warn.innerHTML);
 }
 function preventSpecialChar(e) {
         if(!(e.key>="a" && e.key<="z") && !(e.key>="A" && e.key<="Z") &&  (isNaN(Number(e.key)) || e.key==" ")) {
@@ -111,13 +115,22 @@ function validateEmail(value,warning) {
 function emptyValue(value,input,warning,message) {
     if(!value) {
      addWarning(input,warning,message);
+     return true;
     }
     else {
     if(warning.innerHTML=="Please enter value") {
     removingWarning(input,warning);
+    return false;
     }
     }
-    
+}
+function ageHandler(e) {
+    if(Number(e.target.value)>150) {
+        addWarning(e.target,e.target.nextElementSibling,"enter valid age");
+    }
+    else {
+        removingWarning(e.target,e.target.nextElementSibling);
+    }
 }
 function conformPasswordChangeHandler(e) {
     const value = e.target.value;
@@ -156,23 +169,28 @@ function formSubmitHandler(e) {
        const inputField = formStep.querySelectorAll(".input");
        checkEmptyValue(inputField);
        const next = formStep.querySelector(".next");
-       if(!checkValid(inputField)) return;
+       if(!checkValid(inputField)) {
+          e.target.disabled=true;
+          return;
+       } 
+       nextHandler();
        details = {
         ...details,
         Username:username.value,
         Password:passwordField.value,
        }
        localStorage.setItem("details",JSON.stringify(details));
-       alert("Data saved succesfully");
-       e.target.style.display="none";
-       next.style.display= "block";
     }
     if(e.target.id=="saveStepTwo") {
         const formStep = e.target.parentElement;
        const inputField = formStep.querySelectorAll(".input");
        checkEmptyValue(inputField);
        const next = formStep.querySelector(".next");
-       if(!checkValid(inputField)) return;
+       if(!checkValid(inputField)) {
+            e.target.disabled=true;
+           return;
+       }
+       nextHandler();
        details = {
         ...details,
         "First Name":firstName.value,
@@ -180,7 +198,6 @@ function formSubmitHandler(e) {
         Age:age.value
        }
        localStorage.setItem("details",JSON.stringify(details));
-       alert("Data saved succesfully");
        e.target.style.display="none";
        next.style.display= "block";
     }
@@ -189,7 +206,10 @@ function formSubmitHandler(e) {
         const inputField = formStep.querySelectorAll(".input");
         checkEmptyValue(inputField);
         const next = formStep.querySelector(".next");
-        if(!checkValid(inputField)) return;
+        if(!checkValid(inputField)) {
+            e.target.disabled=true;
+            return;
+        }
         details = {
             ...details,
             Email:emailField.value,
@@ -200,9 +220,6 @@ function formSubmitHandler(e) {
         window.location.href="details.html";
     }
 }
-nextBtn.forEach((next)=>{
-    next.addEventListener("click",nextHandler);
-});
 prevBtn.forEach((prev)=>{
     prev.addEventListener("click",prevHandler);
 });
@@ -220,17 +237,15 @@ phoneNumber.forEach((number)=>{
 })
 age.addEventListener("keydown",numberPressHandler);
 form.addEventListener("click",formSubmitHandler);
+age.addEventListener("keyup",ageHandler);
 formStep.forEach((step)=>{
     const input = step.querySelectorAll(".input");
-    const saveBtn = step.querySelector(".saveBtn");
     const nextBtn = step.querySelector(".next");
     input.forEach((inputValue)=>{
-        inputValue.addEventListener("change",(e)=>{
-            if(saveBtn) {
-                nextBtn.style.display="none";
-                saveBtn.style.display= "block";
-            }
-            emptyValue(e.target.value,e.target,e.target.nextElementSibling,"Please enter value");
+        inputValue.addEventListener("keyup",(e)=>{
+           emptyValue(e.target.value,e.target,e.target.nextElementSibling,"Please enter value");
+           disabledBtn(nextBtn);
         })
     })
 })
+
