@@ -74,12 +74,6 @@ p {
     outline-width: 0
 }
 
-input[type="radio"] {
- width: fit-content  !important;
- margin-top: .85rem !important;
- margin-bottom: 0 !important;
-
-}
 #msform .action-button {
     width: 100px;
     background: #673AB7;
@@ -100,7 +94,7 @@ input[type="radio"] {
 
 #msform .action-button-previous {
     width: 100px;
-    background: #616161;
+    background: black;
     font-weight: bold;
     color: white;
     border: 0 none;
@@ -108,7 +102,8 @@ input[type="radio"] {
     cursor: pointer;
     padding: 10px 5px;
     margin: 10px 5px 10px 0px;
-    float: right
+    float: right;
+    display: none;
 }
 
 #msform .action-button-previous:hover,
@@ -160,4 +155,14 @@ input[type="radio"] {
    }
 .next:disabled {
     cursor: not-allowed !important;
+    background: grey !important;
+}
+.redBorder {
+    border-color: red !important; 
+   }
+i {
+    position: absolute;
+    right: 2%;
+    top: 50%;
+    transform: translateY(-50%);
 }
